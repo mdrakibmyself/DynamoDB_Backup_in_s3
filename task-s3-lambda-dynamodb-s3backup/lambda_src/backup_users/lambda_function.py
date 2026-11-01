@@ -17,7 +17,6 @@ from decimal import Decimal
 
 import boto3
 
-
 dynamodb = boto3.resource("dynamodb")
 s3 = boto3.client("s3")
 
@@ -78,11 +77,13 @@ def lambda_handler(event, context):
 
         return {
             "statusCode": 200,
-            "body": json.dumps({
-                "exported_count": len(items),
-                "s3_uri": s3_uri,
-                "scan_pages": pages,
-            }),
+            "body": json.dumps(
+                {
+                    "exported_count": len(items),
+                    "s3_uri": s3_uri,
+                    "scan_pages": pages,
+                }
+            ),
         }
 
     except Exception as exc:
